@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import NotFound from "./NotFound";
-import CreateDeck from "../Home/CreateDeck";
-import NewDeck from "../Home/NewDeck";
+import CreateDeck from "../Components/CreateDeck";
+import NewDeck from "../Components/NewDeck";
 import { Route, Switch } from "react-router-dom";
-import DeckList from "../Home/DeckList";
+import DeckList from "../Components/DeckList";
+import Study from "../Components/Study";
 
 function Layout() {
+  
   const [decks, setDecks] = useState([]);
 
   useEffect(() => {
     async function loadDecks() {
-      const response = await fetch("http://localhost:8080/decks");
+      const response = await fetch("http://localhost:8080/decks?_embed=cards");
 
       const decksFromAPI = await response.json();
 
@@ -32,6 +34,10 @@ function Layout() {
 
           <Route path="/decks/new">
             <NewDeck />
+          </Route>
+
+          <Route path="/decks/:deckId/study">
+            <Study decks={decks}/>
           </Route>
 
          
