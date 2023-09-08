@@ -1,16 +1,18 @@
-
+import { Switch } from "react-router-dom/cjs/react-router-dom.min";
 import Deck from "./Deck";
+import DeckView from "./DeckView";
+import { Route } from "react-router-dom";
 
-function Decks({decks}) {
-
-    console.log(decks)
+function Decks({ decks }) {
   return (
     <>
-      
-        {decks.map((deck, index) => {
-          <Deck deck={deck} key={index}/>
-        })}
-      
+      {decks.map((deck, index) => {
+        return <Deck deck={deck} key={index} />;
+      })}
+
+      <Route path="/decks/:deckId">
+        <DeckView decks={decks} />
+      </Route>
     </>
   );
 }
