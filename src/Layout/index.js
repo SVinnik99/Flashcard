@@ -22,6 +22,12 @@ function Layout() {
     loadDecks();
   }, []);
 
+
+  const createDeck = (newDeck) => setDecks((currentDeck) => [
+    ...currentDeck,
+    newDeck
+  ])
+
   return (
     <>
       <Header />
@@ -34,7 +40,7 @@ function Layout() {
           </Route>
 
           <Route path="/decks/new">
-            <CreateDeck/>
+            <CreateDeck decks={decks} createDeck={createDeck}/>
           </Route>
           <NotFound />
         </Switch>
