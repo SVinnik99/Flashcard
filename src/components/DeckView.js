@@ -5,7 +5,7 @@ function DeckView({decks}) {
 
     const {deckId} = useParams();
 
-    const deck = decks.find((deck)=>`${deck.id}`===deckId)
+    const deck = decks.find((deck)=>`${deck.id}` === deckId)
 
     console.log(deck)
 

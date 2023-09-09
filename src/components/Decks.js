@@ -10,9 +10,7 @@ function Decks({ decks,deleteDeck }) {
         return <Deck deck={deck} deleteDeck={deleteDeck} key={index} />;
       })}
 
-      <Route path="/decks/:deckId">
-        <DeckView decks={decks} />
-      </Route>
+      
     </>
   );
 }

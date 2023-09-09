@@ -5,6 +5,7 @@ import "./CreateDeck.css";
 function CreateDeck({ createDeck }) {
   const history = useHistory();
   const initialFormData = {
+    id:"",
     name: "",
     description: "",
   };
@@ -16,6 +17,8 @@ function CreateDeck({ createDeck }) {
       ...formData,
       [target.name]: target.value,
     });
+
+    
   };
 
   const handleSubmit = (event) => {
