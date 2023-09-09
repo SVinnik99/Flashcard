@@ -28,6 +28,12 @@ function Layout() {
     newDeck
   ])
 
+  const deleteDeck = (indexToDelete) => {
+    setDecks((currentDecks) => 
+      currentDecks.filter((deck,index) => index !== indexToDelete)    
+    )
+  }
+
   return (
     <>
       <Header />
@@ -36,7 +42,7 @@ function Layout() {
         <Switch>
           <Route exact path="/">
             <CreateDeckButton />
-            <Decks decks={decks} />
+            <Decks deleteDeck={deleteDeck} decks={decks} />
           </Route>
 
           <Route path="/decks/new">

@@ -3,11 +3,11 @@ import Deck from "./Deck";
 import DeckView from "./DeckView";
 import { Route } from "react-router-dom";
 
-function Decks({ decks }) {
+function Decks({ decks,deleteDeck }) {
   return (
     <>
       {decks.map((deck, index) => {
-        return <Deck deck={deck} key={index} />;
+        return <Deck deck={deck} deleteDeck={deleteDeck} key={index} />;
       })}
 
       <Route path="/decks/:deckId">

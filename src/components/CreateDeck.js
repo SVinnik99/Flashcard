@@ -19,11 +19,13 @@ function CreateDeck({ createDeck }) {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    
+    event.preventDefault()
 
     createDeck(formData);
     setFormData(initialFormData);
 
+    history.push("/")
     console.log("submitted", formData);
   };
 
@@ -52,7 +54,7 @@ function CreateDeck({ createDeck }) {
           Cancel
         </button>
 
-        <button type="submit">Submit</button>
+        <button type="submit" >Submit</button>
       </form>
     </div>
   );
