@@ -43,12 +43,14 @@ function Layout() {
             <Decks deleteDeck={deleteDeck} decks={decks} />
           </Route>
 
-          <Route path="/decks/:deckId">
-            <DeckView decks={decks} />
-          </Route>
+         
 
           <Route path="/decks/new">
             <CreateDeck decks={decks} createDeck={createDeck} />
+          </Route>
+
+          <Route path="/decks/:deckId">
+            <DeckView decks={decks} />
           </Route>
           <NotFound />
         </Switch>
