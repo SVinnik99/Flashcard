@@ -7,7 +7,7 @@ import DeckView from "../components/DeckView";
 import CreateDeck from "../components/CreateDeck";
 import CreateDeckButton from "../components/CreateDeckButton";
 import { Switch } from "react-router-dom/cjs/react-router-dom.min";
-import { listDecks } from "../utils/api";
+import { listDecks, createDeck, deleteDeck } from "../utils/api";
 
 function Layout() {
   const [decks, setDecks] = useState([]);
@@ -18,21 +18,16 @@ function Layout() {
     });
   }, []);
 
+  console.log(decks.length);
 
-  console.log(decks);
+  // const createDeck = (newDeck) =>
+  //   setDecks((currentDeck) => [...currentDeck, newDeck]);
 
-
-
-  
-
-  const createDeck = (newDeck) =>
-    setDecks((currentDeck) => [...currentDeck, newDeck]);
-
-  const deleteDeck = (indexToDelete) => {
-    setDecks((currentDecks) =>
-      currentDecks.filter((deck, index) => index !== indexToDelete)
-    );
-  };
+  // const deleteDeck = (indexToDelete) => {
+  //   setDecks((currentDecks) =>
+  //     currentDecks.filter((deck, index) => index !== indexToDelete)
+  //   );
+  // };
 
   return (
     <>

@@ -5,7 +5,6 @@ import "./CreateDeck.css";
 function CreateDeck({ createDeck }) {
   const history = useHistory();
   const initialFormData = {
-    id:"",
     name: "",
     description: "",
   };
@@ -29,6 +28,7 @@ function CreateDeck({ createDeck }) {
     setFormData(initialFormData);
 
     history.push("/")
+    window.location.reload(false);
     console.log("submitted", formData);
   };
 
