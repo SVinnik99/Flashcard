@@ -1,15 +1,18 @@
 import DeckList from "./DeckList";
-import { Route } from "react-router-dom"
+import { Route, useRouteMatch, Switch, Routes } from "react-router-dom";
 
+function Deck({ decks, deleteDeck }) {
+  const { path } = useRouteMatch();
 
-function Deck({decks}) {
+  console.log(path);
   return (
-    <>
-    
-      <Route path={"/"}>
-        <DeckList decks={decks} />
-      </Route>
-    </>
+    <div>
+      <Switch>
+        <Route path={path}>
+          <DeckList decks={decks} deleteDeck={deleteDeck} />
+        </Route>
+      </Switch>
+    </div>
   );
 }
 
