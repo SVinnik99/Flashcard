@@ -6,7 +6,7 @@ import DeckView from "../Components/DeckView";
 import Study from "../Components/Study";
 import { useState, useEffect } from "react";
 import { Route, Switch, Link } from "react-router-dom";
-import { listDecks,createDeck,deleteDeck } from "../utils/api";
+import { listDecks, createDeck, deleteDeck } from "../utils/api";
 import Button from "react-bootstrap/Button";
 import CreateDeck from "../Components/CreateDeck";
 
@@ -14,19 +14,12 @@ function Layout() {
   const [decks, setDecks] = useState([]);
 
   useEffect(() => {
-
-   if(decks){
-    try{
-      listDecks().then(setDecks)
-
-    }catch(error){
-      console.log(error)
-   }
-   } 
-   
+    
+        listDecks().then(setDecks);
+      
   }, []);
 
-  console.log(decks);
+ 
 
   return (
     <>
@@ -39,7 +32,7 @@ function Layout() {
               <Button>Create Deck</Button>
             </Link>
 
-            <Deck decks={decks} deleteDeck={deleteDeck}/>
+            <Deck decks={decks} deleteDeck={deleteDeck} />
           </Route>
 
           <Route path="/decks/new">
@@ -47,11 +40,11 @@ function Layout() {
           </Route>
 
           <Route exact path="/decks/:deckId">
-          <DeckView  />
+            <DeckView />
           </Route>
 
           <Route path="/decks/:deckId/study">
-            <Study decks={decks}/>
+            <Study decks={decks} />
           </Route>
           <NotFound />
         </Switch>

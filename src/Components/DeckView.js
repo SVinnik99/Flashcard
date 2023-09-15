@@ -2,7 +2,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { readDeck, readCard, deleteDeck } from "../utils/api";
+import { readDeck, deleteCard, deleteDeck } from "../utils/api";
 import { useEffect, useState } from "react";
 import { element } from "prop-types";
 function DeckView() {
@@ -15,11 +15,10 @@ function DeckView() {
   useEffect(() => {
     readDeck(deckId).then(setDeck);
 
-
-    fetch(`http://localhost:8080/cards?deckId=${deckId}`).then(response=>response.json()).then(setCards)
-    
+    fetch(`http://localhost:8080/cards?deckId=${deckId}`)
+      .then((response) => response.json())
+      .then(setCards);
   }, []);
-
 
   return (
     <>
@@ -46,19 +45,19 @@ function DeckView() {
       <h1>Cards</h1>
 
       <div>
-             {cards.map((card, index) => (
-              <Card key={index}>
-                <Card.Body>
-                  <Card.Subtitle className="mb-2 text-muted">Front</Card.Subtitle>
-                  <Card.Text>{card.front}</Card.Text>
-                  <Card.Subtitle className="mb-2 text-muted">Back</Card.Subtitle>
-                  <Card.Text>{card.back}</Card.Text>
-                  <Button variant="primary">Edit</Button>
-                  <Button variant="danger">Delete</Button>
-                </Card.Body>
-              </Card>
-            ))}
-          </div>
+        {cards.map((card, index) => (
+          <Card key={index}>
+            <Card.Body>
+              <Card.Subtitle className="mb-2 text-muted">Front</Card.Subtitle>
+              <Card.Text>{card.front}</Card.Text>
+              <Card.Subtitle className="mb-2 text-muted">Back</Card.Subtitle>
+              <Card.Text>{card.back}</Card.Text>
+              <Button variant="primary">Edit</Button>
+              <Button variant="danger" onClick={()=>deleteCard(card.id).then(window.confirm())}>Delete</Button>
+            </Card.Body>
+          </Card>
+        ))}
+      </div>
     </>
   );
 }

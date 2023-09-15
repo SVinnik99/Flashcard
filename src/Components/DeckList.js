@@ -20,7 +20,7 @@ function DeckList({ decks,deleteDeck}) {
           </Card.Text>
           <Link to={`/decks/${deck.id}`}><Button variant="secondary">View</Button></Link>
           <Link to={`/decks/${deck.id}/study`}><Button variant="primary">Study</Button></Link>
-          <Button variant="danger" onClick={()=>deleteDeck(deck.id).then(window.location.reload(false))}>Delete</Button>
+          <Button variant="danger" onClick={()=>deleteDeck(deck.id).then(window.confirm())}>Delete</Button>
         </Card.Body>
       </Card>
       
