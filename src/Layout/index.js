@@ -3,6 +3,9 @@ import Header from "./Header";
 import NotFound from "./NotFound";
 import { listDecks } from "../utils/api";
 import { useState } from "react";
+import Decks from "../Decks/Decks";
+import '../App.css';
+import Study from "../Decks/Study";
 
 function Layout() {
 
@@ -26,7 +29,8 @@ function Layout() {
       <Header />
       <div className="container">
         {/* TODO: Implement the screen starting here */}
-        <p>{decks[0].name}</p>
+        <Decks decks={decks} />
+        <Study deck={decks[0]} />
         <NotFound />
       </div>
     </>
