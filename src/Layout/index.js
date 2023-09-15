@@ -17,9 +17,7 @@ function Layout() {
 
    if(decks){
     try{
-      listDecks().then((response) => {
-        return setDecks(response);
-      });
+      listDecks().then(setDecks)
 
     }catch(error){
       console.log(error)
@@ -49,7 +47,7 @@ function Layout() {
           </Route>
 
           <Route exact path="/decks/:deckId">
-          <DeckView decks={decks} deleteDeck={deleteDeck}/>
+          <DeckView  />
           </Route>
 
           <Route path="/decks/:deckId/study">

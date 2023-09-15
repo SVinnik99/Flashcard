@@ -3,6 +3,7 @@ import { Route, useRouteMatch, Switch, Routes } from "react-router-dom";
 
 function Deck({ decks, deleteDeck }) {
   const { path } = useRouteMatch();
+  
 
   console.log(path);
   return (
@@ -11,6 +12,7 @@ function Deck({ decks, deleteDeck }) {
         <Route path={path}>
           <DeckList decks={decks} deleteDeck={deleteDeck} />
         </Route>
+
       </Switch>
     </div>
   );

@@ -2,24 +2,24 @@ import { useParams, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { readDeck, readCard } from "../utils/api";
+import { readDeck, readCard, deleteDeck } from "../utils/api";
 import { useEffect, useState } from "react";
-function DeckView({ decks, deleteDeck }) {
+import { element } from "prop-types";
+function DeckView() {
   const [cards, setCards] = useState([]);
+  const [deck, setDeck] = useState([]);
   const history = useHistory();
+
   const { deckId } = useParams();
 
-  const deck = decks.find((deck) => `${deck.id}` === deckId);
-
   useEffect(() => {
-    const url = `http://localhost:8080/cards?deckId=${deckId}`;
+    readDeck(deckId).then(setDeck);
 
-    fetch(url)
-      .then((response) => response.json())
-      .then(setCards);
+
+    fetch(`http://localhost:8080/cards?deckId=${deckId}`).then(response=>response.json()).then(setCards)
+    
   }, []);
 
-  console.log(cards);
 
   return (
     <>
@@ -30,7 +30,9 @@ function DeckView({ decks, deleteDeck }) {
           <Link to={``}>
             <Button variant="secondary">Edit</Button>
           </Link>
-          <Link to={`/decks/${deck.id}/study`}><Button variant="primary">Study</Button></Link>
+          <Link to={`/decks/${deck.id}/study`}>
+            <Button variant="primary">Study</Button>
+          </Link>
           <Button variant="primary">Add Cards</Button>
           <Button
             variant="danger"
@@ -44,19 +46,19 @@ function DeckView({ decks, deleteDeck }) {
       <h1>Cards</h1>
 
       <div>
-        {cards.map((card, index) => (
-          <Card>
-            <Card.Body>
-              <Card.Subtitle className="mb-2 text-muted">Front</Card.Subtitle>
-              <Card.Text>{card.front}</Card.Text>
-              <Card.Subtitle className="mb-2 text-muted">Back</Card.Subtitle>
-              <Card.Text>{card.back}</Card.Text>
-              <Button variant="primary">Edit</Button>
-              <Button variant="danger">Delete</Button>
-            </Card.Body>
-          </Card>
-        ))}
-      </div>
+             {cards.map((card, index) => (
+              <Card key={index}>
+                <Card.Body>
+                  <Card.Subtitle className="mb-2 text-muted">Front</Card.Subtitle>
+                  <Card.Text>{card.front}</Card.Text>
+                  <Card.Subtitle className="mb-2 text-muted">Back</Card.Subtitle>
+                  <Card.Text>{card.back}</Card.Text>
+                  <Button variant="primary">Edit</Button>
+                  <Button variant="danger">Delete</Button>
+                </Card.Body>
+              </Card>
+            ))}
+          </div>
     </>
   );
 }
