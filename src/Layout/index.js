@@ -1,14 +1,39 @@
 import React from "react";
 import Header from "./Header";
 import NotFound from "./NotFound";
+import Deck from "../Components/Deck";
+import { useState, useEffect } from "react";
+import { Route, Switch, Link } from "react-router-dom";
+import { listDecks } from "../utils/api";
+import Button from "react-bootstrap/Button";
 
 function Layout() {
+  const [decks, setDecks] = useState([]);
+
+  useEffect(() => {
+    listDecks().then((response) => {
+      return setDecks(response);
+    });
+  }, []);
+
+  console.log(decks);
+
   return (
     <>
       <Header />
+
       <div className="container">
-        {/* TODO: Implement the screen starting here */}
-        <NotFound />
+        <Switch>
+          <Route exact path="/">
+            <Link>
+              <Button>Create Deck</Button>
+            </Link>
+
+            <Deck decks={decks} />
+          </Route>
+
+          <NotFound />
+        </Switch>
       </div>
     </>
   );
