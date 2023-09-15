@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { Route, Switch, Link } from "react-router-dom";
 import { listDecks } from "../utils/api";
 import Button from "react-bootstrap/Button";
+import CreateDeck from "../Components/CreateDeck";
 
 function Layout() {
   const [decks, setDecks] = useState([]);
@@ -25,11 +26,15 @@ function Layout() {
       <div className="container">
         <Switch>
           <Route exact path="/">
-            <Link>
+            <Link to="/decks/new">
               <Button>Create Deck</Button>
             </Link>
 
             <Deck decks={decks} />
+          </Route>
+
+          <Route path="/decks/new">
+            <CreateDeck/>
           </Route>
 
           <NotFound />
