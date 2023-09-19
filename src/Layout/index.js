@@ -11,16 +11,31 @@ import Button from "react-bootstrap/Button";
 import CreateDeck from "../Components/CreateDeck";
 
 function Layout() {
+
+  
   const [decks, setDecks] = useState([]);
-
-  useEffect(() => {
-    
-        listDecks().then(setDecks);
-      
-  }, []);
-
  
 
+  useEffect(() => {
+
+
+
+      // listDecks().then(setDecks) 
+
+      async function fetchDecks(){
+        try{
+          const response = await listDecks();
+          setDecks(response)
+        }catch{}
+      }
+    fetchDecks();
+
+    
+  }, []);
+
+  
+
+ 
   return (
     <>
       <Header />
