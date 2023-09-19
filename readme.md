@@ -8,8 +8,21 @@ Next
 We want to be able to click the card to study. So when clicking on study we should be able to see the first card
 in the deck and all the info inside it
 
-## Left off
+# Current Status:
+We are able to click study and it does render the first card in the deck. We also display the deck title.
+The card number is partially working. It is currently referencing the number by its id. Need a different way to do this.
 
+Next: I want to be able to flip the cards and go to the next card as well.
+Conditionally render the next button to go to the next card.
+
+
+
+9.19.23 11:00 am
+- Study works for first card
+  - must update the way current card number is bieng displayed
+- must implement:
+  - flipping the card
+  - getting the next card
 
 9.15.23 9:50 am
 - Using what we are fetching from express server to render our decks as a list of Deck components.

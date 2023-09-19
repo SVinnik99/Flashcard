@@ -1,5 +1,7 @@
 import React from "react";
 import '../App.css';
+import { Link } from "react-router-dom";
+
 
 function Deck({ deck }) {
   return (
@@ -17,7 +19,11 @@ function Deck({ deck }) {
 
         <div>
           <button className="btn btn-primary">View</button>
-          <button className="btn btn-secondary">Study</button>
+
+          <Link to={`/decks/${deck.id}/study`}>
+            <button className="btn btn-secondary">Study</button>
+          </Link>
+
           <button className="btn btn-danger">Trash Can</button>
         </div>
       </div>

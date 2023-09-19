@@ -7,8 +7,8 @@ function Decks({ decks }) {
   return (
     <>
       {
-        decks.map((deck) => (
-          <Deck deck={deck} />
+        decks.map((deck, index) => (
+          <Deck deck={deck} key={index} />
         ))
       }
     </>
