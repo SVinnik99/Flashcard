@@ -4,6 +4,8 @@ import "./CreateDeck.css";
 
 function CreateDeck({ createDeck }) {
   const history = useHistory();
+
+
   const initialFormData = {
     name: "",
     description: "",
@@ -24,12 +26,9 @@ function CreateDeck({ createDeck }) {
     
     event.preventDefault()
 
-    createDeck(formData);
-    setFormData(initialFormData);
+    createDeck(formData).then(value => history.push(`/decks/${value.id}`))
 
-    history.push("/")
-    window.location.reload(false);
-    console.log("submitted", formData);
+    
   };
 
   return (

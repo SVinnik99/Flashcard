@@ -12,30 +12,30 @@ import CreateDeck from "../Components/CreateDeck";
 
 function Layout() {
 
-  
+
   const [decks, setDecks] = useState([]);
- 
+
 
   useEffect(() => {
 
 
 
-      // listDecks().then(setDecks) 
+    // listDecks().then(setDecks) 
 
-      async function fetchDecks(){
-        try{
-          const response = await listDecks();
-          setDecks(response)
-        }catch{}
-      }
+    async function fetchDecks() {
+      try {
+        const response = await listDecks();
+        setDecks(response)
+      } catch { }
+    }
     fetchDecks();
 
-    
+
   }, []);
 
-  
 
- 
+
+
   return (
     <>
       <Header />
@@ -46,11 +46,10 @@ function Layout() {
             <Link to="/decks/new">
               <Button>Create Deck</Button>
             </Link>
-
-            <Deck decks={decks} deleteDeck={deleteDeck} />
+            <Deck setDecks={setDecks} decks={decks} deleteDeck={deleteDeck} />
           </Route>
 
-          <Route path="/decks/new">
+          <Route exact path="/decks/new">
             <CreateDeck createDeck={createDeck} />
           </Route>
 
@@ -58,10 +57,15 @@ function Layout() {
             <DeckView />
           </Route>
 
-          <Route path="/decks/:deckId/study">
+          <Route exact path="/decks/:deckId/study">
             <Study decks={decks} />
           </Route>
-          <NotFound />
+
+          <Route>
+            <NotFound />
+
+          </Route>
+
         </Switch>
       </div>
     </>

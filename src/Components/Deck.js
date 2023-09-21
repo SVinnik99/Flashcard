@@ -1,7 +1,7 @@
 import DeckList from "./DeckList";
 import { Route, useRouteMatch, Switch, Routes } from "react-router-dom";
 
-function Deck({ decks, deleteDeck }) {
+function Deck({ setDecks, decks, deleteDeck }) {
   const { path } = useRouteMatch();
   
 
@@ -10,7 +10,7 @@ function Deck({ decks, deleteDeck }) {
     <div>
       <Switch>
         <Route path={path}>
-          <DeckList decks={decks} deleteDeck={deleteDeck} />
+          <DeckList setDecks={setDecks} decks={decks} deleteDeck={deleteDeck} />
         </Route>
 
       </Switch>
