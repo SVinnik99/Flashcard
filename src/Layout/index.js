@@ -1,14 +1,14 @@
 import React from "react";
 import Header from "./Header";
 import NotFound from "./NotFound";
-import Deck from "../Components/Deck";
-import DeckView from "../Components/DeckView";
-import Study from "../Components/Study";
+import Deck from "../Components/Deck/Deck";
+import DeckView from "../Components/Deck/DeckView";
+import Study from "../Components/Study/Study";
 import { useState, useEffect } from "react";
 import { Route, Switch, Link } from "react-router-dom";
 import { listDecks, createDeck, deleteDeck } from "../utils/api";
 import Button from "react-bootstrap/Button";
-import CreateDeck from "../Components/CreateDeck";
+import CreateDeck from "../Components/Create/CreateDeck";
 
 function Layout() {
 

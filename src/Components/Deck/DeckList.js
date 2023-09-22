@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { deleteCard } from '../utils/api';
+import { deleteCard } from '../../utils/api';
 import { Link, useHistory } from "react-router-dom"
 
 function DeckList({ setDecks, decks, deleteDeck }) {

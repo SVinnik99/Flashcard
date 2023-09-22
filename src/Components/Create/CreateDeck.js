@@ -1,6 +1,7 @@
 import { Link, useHistory } from "react-router-dom";
 import React, { useState } from "react";
 import "./CreateDeck.css";
+import CreateNavBar from "./CreateNavBar";
 
 function CreateDeck({ createDeck }) {
   const history = useHistory();
@@ -32,6 +33,8 @@ function CreateDeck({ createDeck }) {
   };
 
   return (
+    <>
+    <CreateNavBar/>
     <div>
       <h1>Create Deck</h1>
       <form onSubmit={handleSubmit}>
@@ -59,6 +62,8 @@ function CreateDeck({ createDeck }) {
         <button type="submit" >Submit</button>
       </form>
     </div>
+    </>
+    
   );
 }
 

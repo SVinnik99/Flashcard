@@ -2,7 +2,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { readDeck, deleteCard, deleteDeck } from "../utils/api";
+import { readDeck, deleteCard, deleteDeck } from "../../utils/api";
 import { useEffect, useState } from "react";
 import { element } from "prop-types";
 function DeckView() {
