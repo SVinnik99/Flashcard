@@ -29,10 +29,13 @@ function DeckView() {
           <Link to={``}>
             <Button variant="secondary">Edit</Button>
           </Link>
-          <Link to={`/decks/${deck.id}/study`}>
+          <Link exact to={`/decks/${deck.id}/study`}>
             <Button variant="primary">Study</Button>
           </Link>
-          <Button variant="primary">Add Cards</Button>
+          <Link to={`/decks/${deckId}/cards/new`}>
+            <Button variant="primary">Add Cards</Button>
+          </Link>
+
           <Button
             variant="danger"
             onClick={() => deleteDeck(deck.id).then(history.push("/"))}
@@ -53,7 +56,12 @@ function DeckView() {
               <Card.Subtitle className="mb-2 text-muted">Back</Card.Subtitle>
               <Card.Text>{card.back}</Card.Text>
               <Button variant="primary">Edit</Button>
-              <Button variant="danger" onClick={()=>deleteCard(card.id).then(window.confirm())}>Delete</Button>
+              <Button
+                variant="danger"
+                onClick={() => deleteCard(card.id).then(window.confirm())}
+              >
+                Delete
+              </Button>
             </Card.Body>
           </Card>
         ))}

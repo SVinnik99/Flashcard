@@ -4,11 +4,12 @@ import NotFound from "./NotFound";
 import Deck from "../Components/Deck/Deck";
 import DeckView from "../Components/Deck/DeckView";
 import Study from "../Components/Study/Study";
+import AddCards from "../Components/Add/AddCards"
 import { useState, useEffect } from "react";
 import { Route, Switch, Link } from "react-router-dom";
 import { listDecks, createDeck, deleteDeck } from "../utils/api";
 import Button from "react-bootstrap/Button";
-import CreateDeck from "../Components/Create/CreateDeck";
+import CreateDeck from "../Components/CreateDeck/CreateDeck";
 
 function Layout() {
 
@@ -59,6 +60,10 @@ function Layout() {
 
           <Route exact path="/decks/:deckId/study">
             <Study decks={decks} />
+          </Route>
+
+          <Route path="/decks/:deckId/cards/new">
+            <AddCards/>
           </Route>
 
           <Route>
