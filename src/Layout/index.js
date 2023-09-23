@@ -4,38 +4,28 @@ import NotFound from "./NotFound";
 import Deck from "../Components/Deck/Deck";
 import DeckView from "../Components/Deck/DeckView";
 import Study from "../Components/Study/Study";
-import AddCards from "../Components/Add/AddCards"
+import AddCards from "../Components/Add/AddCards";
 import { useState, useEffect } from "react";
 import { Route, Switch, Link } from "react-router-dom";
 import { listDecks, createDeck, deleteDeck } from "../utils/api";
 import Button from "react-bootstrap/Button";
 import CreateDeck from "../Components/CreateDeck/CreateDeck";
+import EditDeck from "../Components/Edit/EditDeck";
 
 function Layout() {
-
-
   const [decks, setDecks] = useState([]);
 
-
   useEffect(() => {
-
-
-
-    // listDecks().then(setDecks) 
+    // listDecks().then(setDecks)
 
     async function fetchDecks() {
       try {
         const response = await listDecks();
-        setDecks(response)
-      } catch { }
+        setDecks(response);
+      } catch {}
     }
     fetchDecks();
-
-
   }, []);
-
-
-
 
   return (
     <>
@@ -55,7 +45,7 @@ function Layout() {
           </Route>
 
           <Route exact path="/decks/:deckId">
-            <DeckView />
+            <DeckView decks={decks} setDecks={setDecks} />
           </Route>
 
           <Route exact path="/decks/:deckId/study">
@@ -63,14 +53,16 @@ function Layout() {
           </Route>
 
           <Route path="/decks/:deckId/cards/new">
-            <AddCards/>
+            <AddCards />
+          </Route>
+
+          <Route path="/decks/:deckId/edit">
+            <EditDeck />
           </Route>
 
           <Route>
             <NotFound />
-
           </Route>
-
         </Switch>
       </div>
     </>

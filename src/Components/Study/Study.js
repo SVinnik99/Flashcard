@@ -21,12 +21,10 @@ function Study() {
     const url = `http://localhost:8080/cards?deckId=${deckId}`;
 
     async function fetchCards() {
-      
-        const response = await fetch(url);
-        const cardsFromAPI = await response.json();
+      const response = await fetch(url);
+      const cardsFromAPI = await response.json();
 
-        setCards(cardsFromAPI);
-      
+      setCards(cardsFromAPI);
     }
     fetchCards();
   }, []);
@@ -35,7 +33,7 @@ function Study() {
   function nextCard(index, total) {
     if (index < total) {
       setCardNum(cardNum + 1);
-      isFront(true)
+      isFront(true);
     } else {
       if (
         window.confirm(
@@ -67,7 +65,12 @@ function Study() {
       return null;
     } else {
       return (
-        <Button variant="primary" onClick={() => nextCard(index + 1, cards.length)}>Next</Button>
+        <Button
+          variant="primary"
+          onClick={() => nextCard(index + 1, cards.length)}
+        >
+          Next
+        </Button>
       );
     }
   }
@@ -88,11 +91,11 @@ function Study() {
                         Card {index + 1} of {cards.length}
                       </Card.Title>
 
-                      <Card.Text>{front?card.front:card.back}</Card.Text>
+                      <Card.Text>{front ? card.front : card.back}</Card.Text>
                       <Button variant="secondary" onClick={flipCard}>
                         Flip
                       </Button>
-                      {showNextButton(cards,index)}
+                      {showNextButton(cards, index)}
                     </Card.Body>
                   </Card>
                 </div>
@@ -105,28 +108,28 @@ function Study() {
   }
 
   function notEnoughCards() {
-    return(
+    return (
       <div>
         <h2>Not enough cards</h2>
-        <p>You need atleast 3 cards to study. There are {cards.length} cards 
-        in this deck.</p>
+        <p>
+          You need atleast 3 cards to study. There are {cards.length} cards in
+          this deck.
+        </p>
       </div>
-    )
+    );
   }
 
-  
   return (
     <>
+      <StudyNavBar />
 
-    <StudyNavBar/>
-    
-    <div>
-      {cards.length === 0
-      ? notEnoughCards()
-      : cards.length > 2
-      ? enoughCards()
-      : notEnoughCards()}
-    </div>
+      <div>
+        {cards.length === 0
+          ? notEnoughCards()
+          : cards.length > 2
+          ? enoughCards()
+          : notEnoughCards()}
+      </div>
     </>
   );
 }

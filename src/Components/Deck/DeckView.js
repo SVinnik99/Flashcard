@@ -5,7 +5,7 @@ import Card from "react-bootstrap/Card";
 import { readDeck, deleteCard, deleteDeck } from "../../utils/api";
 import { useEffect, useState } from "react";
 import { element } from "prop-types";
-function DeckView() {
+function DeckView({decks,setDecks}) {
   const [cards, setCards] = useState([]);
   const [deck, setDeck] = useState([]);
   const history = useHistory();
@@ -20,6 +20,29 @@ function DeckView() {
       .then(setCards);
   }, []);
 
+  const handleCardDelete = async (card) => {
+    const message = window.confirm(
+      "Delete this card?\n\nYou will not be able to recover this."
+    );
+
+    if (message) {
+      await deleteCard(card.id);
+
+      setCards(cards.filter((element) => element.id !== card.id));
+      history.push(`/decks/${deckId}`);
+    }
+
+   
+  }
+
+  const handleDeckDelete = async (deck) => {
+    const message = window.confirm("Delete this deck?\n\n\You will not be able to recover this.")
+    if(message){
+      await deleteDeck(deck.id)
+      setDecks(decks.filter(element => element.id !== deck.id))
+      history.push("/")
+    }
+  }
   return (
     <>
       <Card>
@@ -38,7 +61,7 @@ function DeckView() {
 
           <Button
             variant="danger"
-            onClick={() => deleteDeck(deck.id).then(history.push("/"))}
+            onClick={()=>handleDeckDelete(deck)}
           >
             Delete
           </Button>
@@ -56,10 +79,8 @@ function DeckView() {
               <Card.Subtitle className="mb-2 text-muted">Back</Card.Subtitle>
               <Card.Text>{card.back}</Card.Text>
               <Button variant="primary">Edit</Button>
-              <Button
-                variant="danger"
-                onClick={() => deleteCard(card.id).then(window.confirm())}
-              >
+              {console.log(card)}
+              <Button variant="danger" onClick={() => handleCardDelete(card)}>
                 Delete
               </Button>
             </Card.Body>
