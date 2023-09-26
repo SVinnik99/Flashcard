@@ -68,7 +68,7 @@ function EditCard() {
     <>
       <h1>Edit Card</h1>
       <div>
-        {formData.front && formData.back ? (
+        {formData ? (
           <form onSubmit={handleSubmit}>
             <label>Front</label>
             <textarea
@@ -96,7 +96,7 @@ function EditCard() {
             <button type="submit">Save</button>
           </form>
         ) : (
-          <p>loading</p>
+          <h2>Loading...</h2>
         )}
       </div>
     </>
