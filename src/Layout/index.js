@@ -5,6 +5,7 @@ import Deck from "../Components/Deck/Deck";
 import DeckView from "../Components/Deck/DeckView";
 import Study from "../Components/Study/Study";
 import AddCards from "../Components/Add/AddCards";
+import EditCard from "../Components/Edit/EditCard";
 import { useState, useEffect } from "react";
 import { Route, Switch, Link } from "react-router-dom";
 import { listDecks, createDeck, deleteDeck } from "../utils/api";
@@ -58,6 +59,12 @@ function Layout() {
 
           <Route path="/decks/:deckId/edit">
             <EditDeck />
+          </Route>
+
+          <Route path="/decks/:deckId/cards/:cardId/edit">
+
+            <EditCard/>
+
           </Route>
 
           <Route>

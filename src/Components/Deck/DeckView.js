@@ -78,8 +78,8 @@ function DeckView({decks,setDecks}) {
               <Card.Text>{card.front}</Card.Text>
               <Card.Subtitle className="mb-2 text-muted">Back</Card.Subtitle>
               <Card.Text>{card.back}</Card.Text>
-              <Button variant="primary">Edit</Button>
-              {console.log(card)}
+              <Link to={`/decks/${deck.id}/cards/${card.id}/edit`}><Button variant="primary">Edit</Button></Link>
+              
               <Button variant="danger" onClick={() => handleCardDelete(card)}>
                 Delete
               </Button>

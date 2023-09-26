@@ -39,14 +39,8 @@
     {
       "front": "What does <Switch> do?",
       "back": "Renders the first matching child <Route> ",
-      "deckId": 2,
-      "id": 5
-    },
-    {
-      "front": "samuel",
-      "back": "vinnik",
-      "deckId": 2,
-      "id": 6
+      "id": 5,
+      "deckId": "2"
     }
   ]
 }
