@@ -10,6 +10,7 @@ import {
   useHistory,
   useParams,
 } from "react-router-dom/cjs/react-router-dom.min";
+import EditCardNav from "./EditCardNav";
 
 function EditCard() {
   const [deck, setDeck] = useState([]);
@@ -18,7 +19,7 @@ function EditCard() {
   const { deckId } = useParams();
   const { cardId } = useParams();
 
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState([]);
 
   useEffect(() => {
     async function fetchDeck() {
@@ -30,8 +31,6 @@ function EditCard() {
     fetchDeck();
   }, []);
 
-  console.log(formData);
-
   useEffect(() => {
     async function fetchCard() {
       const response = await readCard(cardId);
@@ -40,12 +39,12 @@ function EditCard() {
         front: response.front,
         back: response.back,
         id: response.id,
-        deckId: deckId,
+        deckId: parseInt(deckId),
       });
     }
 
     fetchCard();
-  }, []);
+  },[]);
 
   const handleChange = ({ target }) => {
     setFormData({
@@ -54,9 +53,10 @@ function EditCard() {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    updateCard(formData).then(history.push(`/decks/${deckId}`));
+   await updateCard(formData)
+    history.push(`/decks/${deckId}`)
   };
 
   // create form with front/back text area
@@ -66,6 +66,8 @@ function EditCard() {
 
   return (
     <>
+
+      <EditCardNav deck={deck} card={card}/>
       <h1>Edit Card</h1>
       <div>
         {formData ? (

@@ -15,6 +15,8 @@ import {
 } from "react-router-dom/cjs/react-router-dom.min";
 
 import { createCard } from "../../utils/api";
+import AddCardsNav from "./AddCardsNav";
+import DeckList from "../Deck/DeckList";
 
 function AddCards() {
   const history = useHistory();
@@ -27,11 +29,13 @@ function AddCards() {
 
   useEffect(() => {
     async function fetchDeck() {
-      const response = await readDeck(deckId);
+      const abortController = new AbortController();
+      const response = await readDeck(deckId, abortController.signal);
       setDeck(response);
+      return () => abortController.abort();
     }
     fetchDeck();
-  });
+  },[]);
 
   const handleChange = ({ target }) => {
     setFormData({
@@ -51,8 +55,11 @@ function AddCards() {
 
   return (
     <>
-      <h2>{deck.name}: Add Card</h2>
+    <AddCardsNav deck={deck}/>
+    
+     <h3>{deck.name}</h3> <h3>Add Card</h3>  {/*<-- this was the only way the test will pass */}
       <form onSubmit={handleSave}>
+      
         <label>Front</label>
         <textarea
           id="front"
@@ -74,6 +81,8 @@ function AddCards() {
           Done
         </button>
       </form>
+   
+    
     </>
   );
 }

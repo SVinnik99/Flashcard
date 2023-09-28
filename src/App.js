@@ -14,10 +14,7 @@ function App() {
         <Route path="/">
           <Layout />
         </Route>
-
       </Switch>
-
-
     </div>
   );
 }

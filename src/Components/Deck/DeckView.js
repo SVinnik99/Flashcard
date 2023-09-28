@@ -4,21 +4,37 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { readDeck, deleteCard, deleteDeck } from "../../utils/api";
 import { useEffect, useState } from "react";
-import { element } from "prop-types";
-function DeckView({decks,setDecks}) {
+import DeckNav from "./DeckNav";
+
+function DeckView({setDecks,decks}) {
   const [cards, setCards] = useState([]);
   const [deck, setDeck] = useState([]);
   const history = useHistory();
 
   const { deckId } = useParams();
 
-  useEffect(() => {
-    readDeck(deckId).then(setDeck);
 
-    fetch(`http://localhost:8080/cards?deckId=${deckId}`)
-      .then((response) => response.json())
-      .then(setCards);
-  }, []);
+  // !this code was causing tests not to pass
+
+  //------------------------------------------
+  // useEffect(() => {
+  //   readDeck(deckId).then(setDeck);
+
+  //   fetch(`http://localhost:8080/cards?deckId=${deckId}`)
+  //     .then((response) => response.json())
+  //     .then(setCards);
+  // }, []);
+
+  //------------------------------------------
+
+  useEffect(() => {
+    async function fetchDeck() {
+      const response = await readDeck(deckId)
+      setDeck(response)
+      setCards(response.cards)
+    }
+    fetchDeck()
+  }, [])
 
   const handleCardDelete = async (card) => {
     const message = window.confirm(
@@ -31,25 +47,24 @@ function DeckView({decks,setDecks}) {
       setCards(cards.filter((element) => element.id !== card.id));
       history.push(`/decks/${deckId}`);
     }
-
-   
   }
 
   const handleDeckDelete = async (deck) => {
     const message = window.confirm("Delete this deck?\n\n\You will not be able to recover this.")
-    if(message){
+    if (message) {
       await deleteDeck(deck.id)
       setDecks(decks.filter(element => element.id !== deck.id))
       history.push("/")
     }
   }
   return (
-    <>
+    <> 
+    <DeckNav deck={deck}/>
       <Card>
         <Card.Header as="h5">{deck.name}</Card.Header>
         <Card.Body>
           <Card.Text>{deck.description}</Card.Text>
-          <Link to={``}>
+          <Link to={`/decks/${deckId}/edit`}>
             <Button variant="secondary">Edit</Button>
           </Link>
           <Link exact to={`/decks/${deck.id}/study`}>
@@ -61,7 +76,7 @@ function DeckView({decks,setDecks}) {
 
           <Button
             variant="danger"
-            onClick={()=>handleDeckDelete(deck)}
+            onClick={() => handleDeckDelete(deck)}
           >
             Delete
           </Button>
@@ -79,7 +94,7 @@ function DeckView({decks,setDecks}) {
               <Card.Subtitle className="mb-2 text-muted">Back</Card.Subtitle>
               <Card.Text>{card.back}</Card.Text>
               <Link to={`/decks/${deck.id}/cards/${card.id}/edit`}><Button variant="primary">Edit</Button></Link>
-              
+
               <Button variant="danger" onClick={() => handleCardDelete(card)}>
                 Delete
               </Button>

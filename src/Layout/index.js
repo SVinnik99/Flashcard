@@ -9,7 +9,8 @@ import EditCard from "../Components/Edit/EditCard";
 import { useState, useEffect } from "react";
 import { Route, Switch, Link } from "react-router-dom";
 import { listDecks, createDeck, deleteDeck } from "../utils/api";
-import Button from "react-bootstrap/Button";
+import Home from "../Components/Home/Home";
+
 import CreateDeck from "../Components/CreateDeck/CreateDeck";
 import EditDeck from "../Components/Edit/EditDeck";
 
@@ -20,10 +21,10 @@ function Layout() {
     // listDecks().then(setDecks)
 
     async function fetchDecks() {
-      try {
-        const response = await listDecks();
-        setDecks(response);
-      } catch {}
+
+      const response = await listDecks();
+      setDecks(response);
+
     }
     fetchDecks();
   }, []);
@@ -34,39 +35,28 @@ function Layout() {
 
       <div className="container">
         <Switch>
-          <Route exact path="/">
-            <Link to="/decks/new">
-              <Button>Create Deck</Button>
-            </Link>
-            <Deck setDecks={setDecks} decks={decks} deleteDeck={deleteDeck} />
-          </Route>
 
-          <Route exact path="/decks/new">
-            <CreateDeck createDeck={createDeck} />
+          <Route exact path= "/">
+            <Home setDecks={setDecks} decks={decks} deleteDeck={deleteDeck} />
           </Route>
-
+          <Route  exact path="/decks/new">
+            <CreateDeck />
+          </Route>
           <Route exact path="/decks/:deckId">
-            <DeckView decks={decks} setDecks={setDecks} />
+            <DeckView setDecks={setDecks} decks={decks}/>
           </Route>
-
           <Route exact path="/decks/:deckId/study">
             <Study decks={decks} />
           </Route>
-
-          <Route path="/decks/:deckId/cards/new">
-            <AddCards />
-          </Route>
-
-          <Route path="/decks/:deckId/edit">
+          <Route  exact path="/decks/:deckId/edit">
             <EditDeck />
           </Route>
-
-          <Route path="/decks/:deckId/cards/:cardId/edit">
-
-            <EditCard/>
-
+          <Route exact path="/decks/:deckId/cards/:cardId/edit">
+            <EditCard />
           </Route>
-
+          <Route exact path="/decks/:deckId/cards/new">
+            <AddCards />
+          </Route>
           <Route>
             <NotFound />
           </Route>

@@ -12,6 +12,11 @@ function DeckList({ setDecks, decks, deleteDeck }) {
   //Then if confirmed, wait for the deck to delete
   //Update the decks by filtering out the deck thats been deleted
   //Then return to the home page
+
+
+
+
+  
   const handleDelete = async (deck) => {  // the "async" allows you to await the deleteDeck later
 
     const confirmDelete = window.confirm('Delete this deck?\n\nYou will not be able to recover this.')
@@ -24,6 +29,8 @@ function DeckList({ setDecks, decks, deleteDeck }) {
 
     }
   }
+
+
 
   return (
     <>

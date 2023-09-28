@@ -2,8 +2,9 @@ import { Link, useHistory } from "react-router-dom";
 import React, { useState } from "react";
 import "./CreateDeck.css";
 import CreateNavBar from "./CreateNavBar";
+import { createDeck } from "../../utils/api";
 
-function CreateDeck({ createDeck }) {
+function CreateDeck() {
   const history = useHistory();
 
 
